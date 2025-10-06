@@ -1,3 +1,12 @@
+/* ADDED: Basic CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 /* General Styles */
 :root {
     --navy-blue: #0A192F;
@@ -16,8 +25,7 @@ body {
     color: var(--slate);
     font-family: var(--font-sans);
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
+    /* margin: 0; and padding: 0; moved to reset */
     scroll-behavior: smooth;
 }
 
@@ -32,8 +40,9 @@ h1, h2, h3 {
     font-weight: 700;
 }
 
+/* MODIFIED: Make H1 font size responsive */
 h1 {
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 5vw, 3rem); /* min, preferred, max */
     margin-bottom: 10px;
 }
 
@@ -64,6 +73,15 @@ a:hover {
     color: var(--white);
 }
 
+/* ADDED: Accessibility improvement for keyboard users */
+a:focus-visible,
+.social-icon:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+
 hr {
     border: 0;
     height: 1px;
@@ -82,12 +100,13 @@ hr {
     animation: fadeIn 2s ease-in-out;
 }
 
+/* ... (بقیه کد بدون تغییر باقی می‌ماند) ... */
+
 .subtitle {
     font-size: 1.2rem;
     color: var(--light-slate);
 }
 
-/* About Section */
 .about-section p {
     font-size: 1.1rem;
     color: var(--light-slate);
@@ -110,7 +129,6 @@ hr {
     border: 1px solid var(--accent-color);
 }
 
-/* Team Section */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -133,14 +151,23 @@ hr {
     border-left-color: var(--accent-color);
 }
 
-.member-photo {
+.member-photo, .profile-picture { /* MODIFIED: Merged similar styles */
     width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: var(--lightest-navy);
     margin: 0 auto 20px;
     border: 3px solid var(--accent-color);
-    background-image: url('https://source.unsplash.com/100x100/?portrait,person'); /* Placeholder */
+    object-fit: cover;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+}
+
+.member-photo {
+     background-image: url('https://source.unsplash.com/100x100/?portrait,person');
 }
 
 .team-member h3 {
@@ -153,7 +180,6 @@ hr {
     color: var(--slate);
 }
 
-/* Contact Section */
 .contact-section p {
     margin-bottom: 30px;
     font-size: 1.1rem;
@@ -180,7 +206,6 @@ hr {
     color: var(--navy-blue);
 }
 
-/* Footer */
 .footer {
     text-align: center;
     padding: 20px;
@@ -189,8 +214,19 @@ hr {
     font-size: 0.9rem;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* ADDED: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
