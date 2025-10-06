@@ -231,18 +231,22 @@ hr {
   }
 }
 /* Custom photos for team members */
+/* Custom photos for team members */
 #madi-photo {
-  background-image: url('Pic/IMG_4734.heic');
-  background-size: cover; /* Ensures the image covers the circle */
-  background-position: center; /* Centers the image in the circle */
+  background-image: url('Pic/madi.jpg'); /* Make sure this is a .jpg or .png */
+  background-size: cover;
+  background-position: center;
 }
 
-/* You can do the same for other members */
 #alferedo-photo {
-  background-image: url('Pic/44321183.jpg');
+  background-image: url('Pic/alferedo.jpg'); /* Example name, use your actual file name */
+  background-size: cover;
+  background-position: center;
 }
 
 #momo-photo {
-  background-image: url('Pic/198244094.jpg');
+  background-image: url('Pic/momo.jpg'); /* Example name, use your actual file name */
+  background-size: cover;
+  background-position: center;
 }
 
