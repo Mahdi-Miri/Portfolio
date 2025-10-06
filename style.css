@@ -233,7 +233,7 @@ hr {
 /* Custom photos for team members */
 /* Custom photos for team members */
 #madi-photo {
-  background-image: url('Pic/IMG_4734.jpeg'); /* Make sure this is a .jpg or .png */
+  background-image: url('Pic/IMG_4734.jpg'); /* Make sure this is a .jpg or .png */
   background-size: cover;
   background-position: center;
 }
