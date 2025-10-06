@@ -232,13 +232,12 @@ hr {
 }
 /* Custom photos for team members */
 #madi-photo {
-  background-image: url('../Pic/madi.jpg');
+  background-image: url('Pic/IMG_4734.heic');
   background-size: cover; /* Ensures the image covers the circle */
   background-position: center; /* Centers the image in the circle */
 }
 
 /* You can do the same for other members */
-/*
 #alferedo-photo {
   background-image: url('../Pic/alferedo.jpg');
 }
@@ -246,4 +245,4 @@ hr {
 #momo-photo {
   background-image: url('../Pic/momo.jpg');
 }
-*/
+
