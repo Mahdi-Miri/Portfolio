@@ -250,3 +250,9 @@ hr {
   background-position: center;
 }
 
+
+#rozzo-photo {
+  background-image: url('Pic/6BDCA02A-4F6E-45B1-8B1E-20B3AEFAA9D5_1_105_c.jpeg'); /* Example name, use your actual file name */
+  background-size: cover;
+  background-position: center;
+}
