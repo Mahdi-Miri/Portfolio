@@ -301,11 +301,20 @@
           }
         }
         
-        /* Custom photos for team members */
-        #madi-photo { background-image: url('https://placehold.co/100x100/233554/e6f1ff?text=Madi'); }
-        #alferedo-photo { background-image: url('https://placehold.co/100x100/233554/e6f1ff?text=Alferedo'); }
-        #momo-photo { background-image: url('https://placehold.co/100x100/233554/e6f1ff?text=MoMo'); }
-        #rozzo-photo { background-image: url('https://placehold.co/100x100/233554/e6f1ff?text=Rozzo'); }
+        /*
+          MODIFIED: Using relative paths to local images.
+          Make sure your folder structure is correct:
+          - index.html
+          - /Pic
+            - 17543637.jpg
+            - 44321183.jpg
+            - etc.
+          Ensure the filenames below EXACTLY match your image files.
+        */
+        #madi-photo { background-image: url('Pic/17543637.jpg'); }
+        #alferedo-photo { background-image: url('Pic/44321183.jpg'); }
+        #momo-photo { background-image: url('Pic/198244094.jpg'); }
+        #rozzo-photo { background-image: url('Pic/6BDCA02A-4F6E-45B1-8B1E-20B3AEFAA9D5_1_105_c.jpeg'); }
 
     </style>
 </head>
