@@ -4,15 +4,326 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team | AI & Data Science Proposal</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ADDED: Basic CSS Reset */
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        /* General Styles */
+        :root {
+            --navy-blue: #0A192F;
+            --light-navy: #112240;
+            --lightest-navy: #233554;
+            --slate: #8892b0;
+            --light-slate: #a8b2d1;
+            --lightest-slate: #ccd6f6;
+            --white: #e6f1ff;
+            --accent-color: #64ffda;
+            --font-sans: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--navy-blue);
+            color: var(--slate);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1, h2, h3 {
+            color: var(--lightest-slate);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--white);
+        }
+
+        a:focus-visible,
+        .social-icon:focus-visible {
+          outline: 2px solid var(--accent-color);
+          outline-offset: 3px;
+          border-radius: 3px;
+        }
+
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--lightest-navy), rgba(0, 0, 0, 0));
+            margin: 60px 0;
+        }
+
+        .hero-section {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.9)), url('https://source.unsplash.com/1600x900/?ai,technology') no-repeat center center/cover;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--light-slate);
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            color: var(--light-slate);
+            max-width: 800px;
+        }
+
+        .skills {
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skills span {
+            background-color: var(--light-navy);
+            color: var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent-color);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px; /* Reduced gap for better fit */
+        }
+
+        .team-member {
+            background-color: var(--light-navy);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-left-color: var(--accent-color);
+        }
+
+        .member-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: var(--lightest-navy);
+            margin: 0 auto 20px;
+            border: 3px solid var(--accent-color);
+            object-fit: cover;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .team-member h3 {
+            margin-bottom: 5px;
+            font-size: 1.4rem;
+        }
+
+        .team-member p {
+            font-size: 0.95rem;
+            color: var(--slate);
+        }
+
+        .contact-section {
+            text-align: center;
+        }
+        
+        .contact-section p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* --- Modal Styles --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 25, 47, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--light-navy);
+            padding: 40px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-content h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--lightest-navy);
+            padding-bottom: 10px;
+        }
+        
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-list li span {
+            color: var(--lightest-slate);
+            font-weight: bold;
+            width: 100px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--slate);
+            font-size: 2.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .contact-button {
+            display: inline-block;
+            padding: 12px 25px;
+            border: 1px solid var(--accent-color);
+            background-color: transparent;
+            color: var(--accent-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background-color: var(--accent-color);
+            color: var(--navy-blue);
+        }
+
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--light-navy);
+            color: var(--slate);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+          }
+        }
+        
+        /*
+          MODIFIED: Using relative paths to local images.
+          Make sure your folder structure is correct:
+          - index.html
+          - /Pic
+            - 17543637.jpg
+            - 44321183.jpg
+            - etc.
+          Ensure the filenames below EXACTLY match your image files.
+        */
+        #madi-photo { background-image: url('Pic/17543637.jpg'); }
+        #alferedo-photo { background-image: url('Pic/44321183.jpg'); }
+        #momo-photo { background-image: url('Pic/198244094.jpg'); }
+        #rozzo-photo { background-image: url('Pic/6BDCA02A-4F6E-45B1-8B1E-20B3AEFAA9D5_1_105_c.jpeg'); }
+
+    </style>
 </head>
 <body>
 
     <header class="hero-section">
         <div class="container">
             <h1>AI & Data Science Specialist Team</h1>
-            <p class="subtitle">Master's  students in Data Science at the University of Naples Federico II</p>
+            <p class="subtitle">Master's students in Data Science at the University of Naples Federico II</p>
         </div>
     </header>
 
@@ -32,45 +343,43 @@
 
         <hr>
 
-    <section id="team" class="team-section">
-        <h2>Our Team Members</h2>
-        <div class="team-grid">
+        <section id="team" class="team-section">
+            <h2>Our Team Members</h2>
+            <div class="team-grid">
+                <!-- IMPORTANT: data-url attribute added for JavaScript redirection -->
                 <div class="team-member" data-url="https://faridrash.vercel.app/">
-                <div id="alferedo-photo" class="member-photo"></div>
-                <h3>Alferedo</h3>
-                <p>Image Processing & Deep Learning Specialist</p>
-            </div>
+                    <div id="alferedo-photo" class="member-photo"></div>
+                    <h3>Alferedo</h3>
+                    <p>Image Processing & Deep Learning Specialist</p>
+                </div>
 
-            <div class="team-member" data-url="team/madi.html">
-                <div id="madi-photo" class="member-photo"></div>
-                <h3>Madi</h3>
-                <p>Data Analyst & Statistical Modeling Expert</p>
-            </div>
+                <div class="team-member" data-url="https://resume-git-master-mahdi-miris-projects.vercel.app">
+                    <div id="madi-photo" class="member-photo"></div>
+                    <h3>Madi</h3>
+                    <p>Data Analyst & Statistical Modeling Expert</p>
+                </div>
 
-            <div class="team-member" data-url="team/momo.html">
-                <div id="momo-photo" class="member-photo"></div>
-                <h3>MoMo</h3>
-                <p>Large Language Models (LLM) & NLP Specialist</p>
-            </div>
+                <div class="team-member" data-url="https://resume-one-topaz-24.vercel.app">
+                    <div id="momo-photo" class="member-photo"></div>
+                    <h3>MoMo</h3>
+                    <p>Large Language Models (LLM) & NLP Specialist</p>
+                </div>
 
-            <div class="team-member" data-url="https://alireza-fazel-resume.vercel.app/">
-                <div id="rozzo-photo" class="member-photo"></div>
-                <h3>Rozzo</h3>
-                <p>Image Processing & Deep Learning Specialist</p>
+                <div class="team-member" data-url="https://alireza-fazel-resume.vercel.app/">
+                    <div id="rozzo-photo" class="member-photo"></div>
+                    <h3>Rozzo</h3>
+                    <p>Image Processing & Deep Learning Specialist</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
         <hr>
 
         <section id="contact" class="contact-section">
             <h2>Contact Us</h2>
             <p>To start a collaboration or request a project proposal, feel free to get in touch with us through the channels below.</p>
-            <div class="social-links">
-                <a href="mailto:your-email@example.com" class="social-icon">Email</a>
-                <a href="https://github.com/your-team-github" target="_blank" class="social-icon">GitHub</a>
-                <a href="https://linkedin.com/company/your-team-linkedin" target="_blank" class="social-icon">LinkedIn</a>
-            </div>
+            <!-- MODIFIED: Single button to open the contact modal -->
+            <button id="open-contact-modal" class="contact-button">Show Contact Info</button>
         </section>
     </main>
 
@@ -78,6 +387,93 @@
         <p>&copy; 2025 - All rights reserved by Our Team.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- ADDED: The Modal for Contact Information -->
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-contact-modal" class="close-modal">&times;</button>
+            
+            <h3>LinkedIn Profiles</h3>
+            <ul class="contact-list">
+                <li><span>Alferedo:</span> <a href="https://www.linkedin.com/in/FaridRash/" target="_blank">linkedin.com/in/FaridRash</a></li>
+                <li><span>Madi:</span> <a href="https://www.linkedin.com/in/mahdi-miri-dev/" target="_blank">linkedin.com/in/mahdi-miri-dev</a></li>
+                <li><span>MoMo:</span> <a href="https://www.linkedin.com/in/mohammad-aghaei-molasaraei-b37036311/" target="_blank">linkedin.com/in/mohammad-aghaei...</a></li>
+                <li><span>Rozzo:</span> <a href="https://www.linkedin.com/in/alireza-fazel-863204199/" target="_blank">linkedin.com/in/alireza-fazel...</a></li>
+            </ul>
+
+            <h3>GitHub Profiles</h3>
+            <ul class="contact-list">
+                <li><span>Alferedo:</span> <a href="https://github.com/FaridRash" target="_blank">github.com/FaridRash</a></li>
+                <li><span>Madi:</span> <a href="https://github.com/Mahdi-Miri" target="_blank">github.com/Mahdi-Miri</a></li>
+                <li><span>MoMo:</span> <a href="https://github.com/MohammadAghaei1" target="_blank">github.com/MohammadAghaei1</a></li>
+                <li><span>Rozzo:</span> <a href="https://github.com/aliknot" target="_blank">github.com/aliknot</a></li>
+            </ul>
+
+            <h3>Email Addresses</h3>
+            <ul class="contact-list">
+                <li><span>Alferedo:</span> <a href="mailto:farid.rash@gmail.com">farid.rash@gmail.com</a></li>
+                <li><span>Madi:</span> <a href="mailto:mahdimiri7@gmail.com">mahdimiri7@gmail.com</a></li>
+                <li><span>MoMo:</span> <a href="mailto:mohammadaghaei103@gmail.com">mohammadaghaei103@gmail.com</a></li>
+                <li><span>Rozzo:</span> <a href="mailto:alirezafazel379@gmail.com">alirezafazel379@gmail.com</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Team Member Click/Redirect Logic ---
+            const teamMembers = document.querySelectorAll('.team-member');
+            teamMembers.forEach(member => {
+                member.addEventListener('click', () => {
+                    const url = member.dataset.url;
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                });
+            });
+
+
+            // --- Contact Modal Logic ---
+            const modalOverlay = document.getElementById('contact-modal');
+            const openModalBtn = document.getElementById('open-contact-modal');
+            const closeModalBtn = document.getElementById('close-contact-modal');
+
+            // Function to open the modal
+            const openModal = () => {
+                modalOverlay.classList.add('active');
+            };
+
+            // Function to close the modal
+            const closeModal = () => {
+                modalOverlay.classList.remove('active');
+            };
+
+            // Event listeners
+            if (openModalBtn) {
+                openModalBtn.addEventListener('click', openModal);
+            }
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            
+            // Close modal if user clicks on the overlay background
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', (event) => {
+                    if (event.target === modalOverlay) {
+                        closeModal();
+                    }
+                });
+            }
+
+            // Close modal if user presses the "Escape" key
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

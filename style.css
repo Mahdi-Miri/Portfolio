@@ -25,7 +25,6 @@ body {
     color: var(--slate);
     font-family: var(--font-sans);
     line-height: 1.6;
-    /* margin: 0; and padding: 0; moved to reset */
     scroll-behavior: smooth;
 }
 
@@ -100,8 +99,6 @@ hr {
     animation: fadeIn 2s ease-in-out;
 }
 
-/* ... (بقیه کد بدون تغییر باقی می‌ماند) ... */
-
 .subtitle {
     font-size: 1.2rem;
     color: var(--light-slate);
@@ -131,7 +128,8 @@ hr {
 
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* MODIFIED: Changed to a fixed 4-column layout for wider screens to ensure all members are on one line. */
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 }
 
@@ -230,29 +228,28 @@ hr {
     scroll-behavior: auto !important;
   }
 }
-/* Custom photos for team members */
+
 /* Custom photos for team members */
 #madi-photo {
-  background-image: url('Pic/17543637.jpg'); /* Make sure this is a .jpg or .png */
+  background-image: url('Pic/17543637.jpg');
   background-size: cover;
   background-position: center;
 }
 
 #alferedo-photo {
-  background-image: url('Pic/44321183.jpg'); /* Example name, use your actual file name */
+  background-image: url('Pic/44321183.jpg');
   background-size: cover;
   background-position: center;
 }
 
 #momo-photo {
-  background-image: url('Pic/198244094.jpg'); /* Example name, use your actual file name */
+  background-image: url('Pic/198244094.jpg');
   background-size: cover;
   background-position: center;
 }
 
-
 #rozzo-photo {
-  background-image: url('Pic/6BDCA02A-4F6E-45B1-8B1E-20B3AEFAA9D5_1_105_c.jpeg'); /* Example name, use your actual file name */
+  background-image: url('Pic/6BDCA02A-4F6E-45B1-8B1E-20B3AEFAA9D5_1_105_c.jpeg');
   background-size: cover;
   background-position: center;
 }
